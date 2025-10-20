@@ -1,0 +1,64 @@
+package com.example.ppt
+
+//spinner MainActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+
+class MainActivity2 : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main2)
+
+        val spinnerWarna: Spinner = findViewById(R.id.spinnerWarna)
+        val textWarnaDipilih: TextView = findViewById(R.id.textWarnaDipilih)
+
+        // Daftar warna (pakai emoji biar lebih menarik)
+        val warnaList = arrayOf("🔴 Merah", "🔵 Biru", "🟢 Hijau", "🟡 Kuning", "⚫ Hitam", "⚪ Putih")
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            warnaList
+        )
+        spinnerWarna.adapter = adapter
+
+        // Listener Spinner
+        spinnerWarna.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val warna = parent.getItemAtPosition(position).toString()
+
+                // Update teks
+                textWarnaDipilih.text = "Kamu memilih: $warna"
+
+                // Ganti warna teks sesuai pilihan
+                val warnaText = when (position) {
+                    0 -> R.color.merah
+                    1 -> R.color.biru
+                    2 -> R.color.hijau
+                    3 -> R.color.kuning
+                    4 -> R.color.hitam
+                    else -> R.color.putih
+                }
+
+                textWarnaDipilih.setTextColor(ContextCompat.getColor(this@MainActivity2, warnaText))
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                textWarnaDipilih.text = "Belum ada warna dipilih."
+                textWarnaDipilih.setTextColor(ContextCompat.getColor(this@MainActivity2, R.color.abu))
+            }
+        }
+    }
+}
