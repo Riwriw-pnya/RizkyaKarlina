@@ -1,0 +1,50 @@
+//listView
+
+package com.example.ppt
+import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
+
+
+class MainActivity3 : AppCompatActivity() {
+
+
+    private lateinit var listViewTeman: ListView
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main3)  // pastikan ini nama layout XML-mu
+
+
+        listViewTeman = findViewById(R.id.listViewTeman)
+
+
+        // Data daftar nama teman sekelas
+        val temanList = listOf(
+            "Karlina",
+            "Rizkya",
+            "Gita",
+            "Pryzha",
+            "Salma",
+            "Zahra",
+            "sp lagi ya?",
+            "Hadi",
+            "Intan",
+            "Joko"
+        )
+
+
+        // Membuat adapter ArrayAdapter untuk menampilkan data di ListView
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            temanList
+        )
+
+
+        // Set adapter ke ListView
+        listViewTeman.adapter = adapter
+    }
+}
