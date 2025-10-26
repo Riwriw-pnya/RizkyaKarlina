@@ -1,0 +1,33 @@
+package com.example.ppt
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class CheesecuitAdapter(private val items: List<Cheesecuit>) :
+    RecyclerView.Adapter<CheesecuitAdapter.ViewHolder>() {
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imgCheesecuit: ImageView = view.findViewById(R.id.imgCheesecuit)
+        val txtName: TextView = view.findViewById(R.id.txtName)
+        val txtDescription: TextView = view.findViewById(R.id.txtDescription)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_cheese, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val cheesecuit = items[position]
+        holder.imgCheesecuit.setImageResource(cheesecuit.imageResId)
+        holder.txtName.text = cheesecuit.name
+        holder.txtDescription.text = cheesecuit.description
+    }
+
+    override fun getItemCount() = items.size
+}
